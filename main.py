@@ -24,6 +24,7 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")  # Fill the screen with black
+        player.update(dt)      # Update the player each frame
         player.draw(screen)   # Draw the player each frame
         pygame.display.flip()   # Refresh the screen
         dt = clock.tick(60) / 1000  # Amount of seconds between each loop
