@@ -7,6 +7,7 @@ from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 
 def main():
     pygame.init()
@@ -22,13 +23,15 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable)    # Set the containers for the Player class
     Asteroid.containers = (asteroids, updatable, drawable)  # Set the containers for the Asteroid class
     AsteroidField.containers = (updatable,)
+    Shot.containers = (shots, updatable, drawable)
 
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-    asteroid_field = AsteroidField()
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, shots)
+    asteroid_field = AsteroidField() # Create an instance of AsteroidField
 
     dt = 0
     while True:
@@ -48,6 +51,7 @@ def main():
             item.draw(screen)
         pygame.display.flip()   # Refresh the screen
         dt = clock.tick(60) / 1000  # Amount of seconds between each loop
+        
 
 if __name__ == "__main__":
     main()
